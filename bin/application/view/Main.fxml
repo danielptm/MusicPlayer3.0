@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.Main">
+   <children>
+      <GridPane layoutX="100.0" layoutY="74.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="293.5332946777344" minWidth="10.0" prefWidth="98.38270568847656" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="544.6172943115234" minWidth="10.0" prefWidth="544.6172943115234" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="119.0" minHeight="0.0" prefHeight="119.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="659.0" minHeight="10.0" prefHeight="432.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="338.0" minHeight="0.0" prefHeight="150.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox prefHeight="99.0" prefWidth="177.0" GridPane.rowIndex="1">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="190.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#showArtists" text="Artists" />
+                              <Button mnemonicParsing="false" onAction="#showAllSongs" text="Songs" />
+                              <Button mnemonicParsing="false" onAction="#showAlbums" text="Albums" />
+                           </children>
+                        </HBox>
+                        <ListView fx:id="lv" prefHeight="568.0" prefWidth="177.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <ListView fx:id="plv" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Button fx:id="playBtn" layoutX="39.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#startSongThread" style="-fx-background-radius: 50px;;">
+                     <graphic>
+                        <ImageView fitHeight="106.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/play.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="218.0" layoutY="29.0" mnemonicParsing="false" onAction="#stopSongThread" prefHeight="44.0" prefWidth="56.0" style="-fx-background-radius: 50;">
+                     <graphic>
+                        <ImageView fitHeight="49.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/stop.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button layoutX="139.0" layoutY="24.0" mnemonicParsing="false" onAction="#pauseSongThread" prefHeight="57.0" prefWidth="47.0" style="-fx-background-radius: 50;">
+                     <graphic>
+                        <ImageView fitHeight="61.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/pause.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <StackPane layoutX="327.0" layoutY="72.0" prefHeight="20.0" prefWidth="150.0">
+                     <children>
+                        <ProgressBar fx:id="pb" minHeight="20.0" prefHeight="20.0" prefWidth="186.0" progress="0.0" style="-fx-border-radius: 100;" />
+                        <Slider fx:id="slide" prefHeight="22.0" prefWidth="187.0" style="-fx-border-color: null; -fx-background-insets: 1 0 -1 0, 0, 1; -fx-background-radius: 2.5, 2.5, 1.5; -fx-padding: 0.208333em;" />
+                     </children>
+                  </StackPane>
+                  <ImageView fx:id="info" fitHeight="31.0" fitWidth="31.0" layoutX="327.0" layoutY="41.0" onMouseClicked="#displaySongInfo" pickOnBounds="true" preserveRatio="true" style="visibility: true;">
+                     <image>
+                        <Image url="@../../../../../kurs4WorkSpace/MusicPlayer/src/application/resources/info.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lengthLabel" layoutX="327.0" layoutY="38.0" onMouseClicked="#displaySongInfo" prefHeight="37.0" prefWidth="150.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="runningLabel" layoutX="326.0" layoutY="43.0" onMouseClicked="#displaySongInfo" prefHeight="26.0" prefWidth="145.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+            <TableView fx:id="table" prefHeight="415.0" prefWidth="545.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columns>
+                <TableColumn fx:id="artistCol" prefWidth="164.8231201171875" text="artist" />
+                <TableColumn fx:id="songCol" prefWidth="206.03973388671875" text="song" />
+                  <TableColumn fx:id="albumCol" prefWidth="175.96026611328125" text="album" />
+              </columns>
+            </TableView>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="My music">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="31.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="7.0" />
+                     </padding>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fitHeight="22.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/search.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" top="7.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <TextField fx:id="tf" maxWidth="150.0" onMouseClicked="#showSearchResults">
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label text="PlayLists" GridPane.columnIndex="2">
+               <font>
+                  <Font size="36.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="13.0" />
+               </GridPane.margin>
+            </Label>
+            <Button maxWidth="25.0" minWidth="11.0" mnemonicParsing="false" onAction="#createNewPlayList" prefHeight="11.0" prefWidth="11.0" style="-fx-background-radius: 50;" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets left="145.0" top="70.0" />
+               </GridPane.margin>
+               <graphic>
+                  <ImageView fitHeight="12.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/Untitled.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TextField fx:id="newpl" maxWidth="140.0" prefWidth="50.0" promptText="Playlist name" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets top="70.0" />
+               </GridPane.margin>
+            </TextField>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="37.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#deletePlayList" style="-fx-background-radius: 50;" text="Delete">
+                     <HBox.margin>
+                        <Insets left="10.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#readInPlayLists" style="-fx-background-radius: 50;" text="Show all">
+                     <HBox.margin>
+                        <Insets top="5.0" />
+                     </HBox.margin></Button>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="40.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Canvas fx:id="cv" height="152.0" width="544.0" />
+               </children>
+            </HBox>
+            <VBox prefHeight="213.0" prefWidth="177.0" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
